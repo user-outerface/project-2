@@ -15,7 +15,7 @@ Before you begin, commit your changes. Then go on to the following steps.
 So when you're working on your branch, and you want to do a pull request, switch to master branch and do a git pull
 
 * git checkout master
-* git pull
+* git pull origin master
 
 this updates your local master so that you can merge your branch with master
 
