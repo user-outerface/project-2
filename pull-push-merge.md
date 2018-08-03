@@ -15,7 +15,7 @@ Before you begin, commit your changes. Then go on to the following steps.
 So when you're working on your branch, and you want to do a pull request, switch to master branch and do a git pull
 
 * git checkout master
-* git pull
+* git pull origin master
 
 this updates your local master so that you can merge your branch with master
 
@@ -29,7 +29,7 @@ If there are issues (which there will be), use the gui with your text editor to 
 
 Push to github on your branch.
 
-* git push `<branch name>`
+* git push origin `<branch name>`
 
 After this, make a pull request in GitHub on the repo, and someone else will take a look at the changes too.
 
