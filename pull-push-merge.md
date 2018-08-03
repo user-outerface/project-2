@@ -19,7 +19,7 @@ So when you're working on your branch, and you want to do a pull request, switch
 
 this updates your local master so that you can merge your branch with master
 
-* git checkout <your branch>
+* git checkout `<your branch>`
 
 You want to be on your branch for this next step. For this step, we'll be merging master into your branch. 
 
@@ -29,7 +29,7 @@ If there are issues (which there will be), use the gui with your text editor to 
 
 Push to github on your branch.
 
-* git push <branch name>
+* git push `<branch name>`
 
 After this, make a pull request in GitHub on the repo, and someone else will take a look at the changes too.
 
