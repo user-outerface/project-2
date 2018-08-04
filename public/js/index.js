@@ -4,6 +4,23 @@ var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
+
+/*reverseChanger takes the response from the
+api and converts it to */
+function reverseChanger(oldArr, newArr){
+  var newArr = oldArr.split("");
+  
+  for (var i = 0; i < newArr.length; i ++){
+      if(newArr[i] === "_"){
+          newArr[i] = "/";
+      } else if (newArr[i] === "-"){
+          newArr[i] = "+";
+      }
+  }; 
+  return newArr;
+  console.log(newArr);
+};
+
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveExample: function(example) {
