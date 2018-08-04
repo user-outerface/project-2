@@ -1,5 +1,3 @@
-DROP DATABASE IF EXISTS bookmarks_data;
+CREATE DATABASE exampledb;
 
-CREATE DATABASE bookmarks_data;
-
-USE bookmarks_data;
+USE exampledb;
