@@ -7,9 +7,10 @@ var $exampleList = $("#example-list");
 
 /*reverseChanger takes the response from the
 api and converts it to */
-function reverseChanger(oldArr, newArr){
+function reverseChanger(oldArr){
   var newArr = oldArr.split("");
-  
+  console.log("hit");
+  console.log(newArr);
   for (var i = 0; i < newArr.length; i ++){
       if(newArr[i] === "_"){
           newArr[i] = "/";
@@ -17,8 +18,9 @@ function reverseChanger(oldArr, newArr){
           newArr[i] = "+";
       }
   }; 
-  return newArr;
+  newArr = newArr.join("");
   console.log(newArr);
+  return newArr;
 };
 
 // The API object contains methods for each kind of request we'll make
@@ -114,3 +116,40 @@ var handleDeleteBtnClick = function() {
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+$(document).ready(function () {
+  var apiKey = 'AIzaSyDUAyBLdCKvyP-bqD34KxmwqtzPpCHBVrY';
+  getPageSpeedInsightsFor('http://craigslist.org', apiKey);
+ })
+ 
+ function getPageSpeedInsightsFor(URL, API_KEY) {
+  var API_URL = 'https://www.googleapis.com/pagespeedonline/v2/runPagespeed?screenshot=true&strategy=mobile&';
+  var query = [
+    'url=' + URL,
+    'key=' + API_KEY,
+  ].join('&');
+  $.ajax({
+    url: API_URL + query,
+    type: "GET",
+  }).then(function (response) {
+    console.log(response.screenshot.data);
+    reverseChanger(response.screenshot.data);
+  
+  });
+ 
+ }
+ 
+ function errorFunction(xhr, status, error) {
+  if (xhr.responseJSON.error) {
+    var errors = xhr.responseJSON.error.errors
+    for (var i = 0; i < errors.length; ++i) {
+      alert(errors[i].message);
+    }
+  }
+  return;
+ }
+ 
+ function displayPageScore(result, status, xhr) {
+  score = result.ruleGroups.SPEED.score
+  console.log(score);
+ }
