@@ -114,3 +114,45 @@ var handleDeleteBtnClick = function() {
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+
+// ### Ajax call for pageseed api ###
+
+
+$(document).ready(function () {
+  var apiKey = 'AIzaSyDUAyBLdCKvyP-bqD34KxmwqtzPpCHBVrY'
+  getPageSpeedInsightsFor('http://craigslist.org', apiKey);
+})
+
+function getPageSpeedInsightsFor(URL, API_KEY) {
+  var API_URL = 'https://www.googleapis.com/pagespeedonline/v2/runPagespeed?';
+  var query = [
+    'url=' + URL,
+    'key=' + API_KEY,
+  ].join('&');
+  $.ajax({
+    type: "GET",
+    url: API_URL + query,
+    success: function (data) {
+      displayPageScore(data);
+    },
+    error: function (data) {
+      errorFunction(data);
+    }
+  });
+}
+
+function errorFunction(xhr, status, error) {
+  if (xhr.responseJSON.error) {
+    var errors = xhr.responseJSON.error.errors
+    for (var i = 0; i < errors.length; ++i) {
+      alert(errors[i].message);
+    }
+  }
+  return;
+}
+
+function displayPageScore(result, status, xhr) {
+  score = result.ruleGroups.SPEED.score
+  console.log(score);
+}
