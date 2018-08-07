@@ -1,14 +1,32 @@
 var db = require("../models");
+var keys = require('../keys.js'),
+    MongoClient = require('mongodb').MongoClient,
+    url = keys.mongoDBUrl.mongo_url,
+    assert = require('assert');
+require('dotenv').config();
 
 module.exports = function(app) {
-  // Load index page
+  // Load index page & database connection within
+  // a database connection
   app.get("/", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
-      res.render("index", {
-        msg: "Welcome!",
-        examples: dbExamples
+      MongoClient.connect(url, function(err, mdb){
+        console.log("connected to mdb");
+        var collection = mdb.collection('urls');
+        if(err) throw err;
+        assert.equal(null, err);
+        collection.find({userName: 'dreamwalker'})
+        .toArray(function(err, result){
+            if(err) throw err;
+            res.render("index", {
+              msg: "Welcome!",
+              examples: dbExamples,
+              user: result
+            });
+        });
       });
     });
+    
   });
 
   // Load example page and pass in an example by id
