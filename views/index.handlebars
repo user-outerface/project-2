@@ -29,5 +29,21 @@
   </div>
 </div>
 
+<div class="sites">
+  {{#each user/0/urls}}
+    <div>
+      {{url}}
+    </div>
+    <div>
+      {{comment}}
+    </div>
+    <div>
+      {{filePath}}
+    </div>
+    <button class="peek-a-boo" data-site="{{url}}">{{url}}</button><hr>
+  {{/each}}
+</div>
+<div class="dump"></div>
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>

@@ -1,4 +1,6 @@
 var db = require("../models");
+var keys = require('../keys.js');
+require('dotenv').config();
 
 module.exports = function(app) {
   // Get all examples
@@ -21,4 +23,9 @@ module.exports = function(app) {
       res.json(dbExample);
     });
   });
+
+  app.get("/api/peeker/", function(req, res){
+    console.log(keys.peeker)
+    res.send(keys.peeker);
+  })
 };
