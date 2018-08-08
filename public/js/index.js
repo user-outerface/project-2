@@ -7,18 +7,25 @@ var $exampleList = $("#example-list");
 
 /*reverseChanger takes the response from the
 api and converts it to */
-function reverseChanger(oldArr, newArr){
-  var newArr = oldArr.split("");
-  
-  for (var i = 0; i < newArr.length; i ++){
-      if(newArr[i] === "_"){
-          newArr[i] = "/";
-      } else if (newArr[i] === "-"){
-          newArr[i] = "+";
-      }
-  }; 
-  return newArr;
-  console.log(newArr);
+function reverseChanger(oldStr){
+  // var newArr = oldArr.split("");
+  // console.log("hit");
+  // // console.log(newArr);
+  // for (var i = 0; i < newArr.length; i ++){
+  //     if(newArr[i] === "_"){
+  //         newArr[i] = "/";
+  //     } else if (newArr[i] === "-"){
+  //         newArr[i] = "+";
+  //     }
+  // }; 
+  // newArr = newArr.join("");
+  // console.log(newArr);
+  // var mapObj = {["_"]: "/", ["-"]: "+"};
+  // var re = new RegExp(Object.keys(mapObj).join("|"), "g");
+  // return oldStr.replace(re, function(matched){
+  //   return mapObj[matched];
+  // }); 
+  return oldStr.replace(/_/g, "/").replace(/-/g, "+");
 };
 
 // The API object contains methods for each kind of request we'll make
@@ -111,6 +118,53 @@ var handleDeleteBtnClick = function() {
   });
 };
 
-// Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+ // Add event listeners to the submit and delete buttons
+ $submitBtn.on("click", handleFormSubmit);
+ $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+function errorFunction(xhr, status, error) {
+  if (xhr.responseJSON.error) {
+    var errors = xhr.responseJSON.error.errors
+    for (var i = 0; i < errors.length; ++i) {
+      alert(errors[i].message);
+    }
+  }
+  return;
+}
+ function displayPageScore(result, status, xhr) {
+  score = result.ruleGroups.SPEED.score
+  console.log(score);
+}
+ //Gives display picture for page
+function getPageSpeedInsightsFor(URL, API_KEY) {
+  var API_URL = 'https://www.googleapis.com/pagespeedonline/v2/runPagespeed?screenshot=true&strategy=mobile&';
+  var query = [
+    'url=' + URL,
+     'key=' + API_KEY,
+   ].join('&');
+   $.ajax({
+    url: API_URL + query,
+    type: "GET",
+  }).then(function (response) {
+    // console.log(response.screenshot.data);
+    $(".dump").empty();
+    $(".dump").append(`<img src="data:image/jpeg;base64, ${reverseChanger(response.screenshot.data)}" alt="screenshot">`)
+    reverseChanger(response.screenshot.data);
+    console.log(reverseChanger(response.screenshot.data));
+  });
+}
+//button for display
+$(".peek-a-boo").click(function(){
+  urlSeeker = $(this).data("site");
+  $.ajax("/api/peeker/", {
+    type: "GET"
+  }).then(response =>{
+    // console.log(response.api_key);
+    console.log("hit");
+    var apiKey = response.api_key;
+    getPageSpeedInsightsFor("http://" + urlSeeker, apiKey);
+  });
+
+});
+
+
