@@ -23,6 +23,7 @@ module.exports = function(app) {
               examples: dbExamples,
               user: result
             });
+            // res.sendFile("test.html", {root: __dirname + "/.."});
         });
       });
     });
