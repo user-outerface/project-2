@@ -139,7 +139,10 @@ function getPageSpeedInsightsFor(URL, API_KEY, divId) {
     $(".dump").append(`<img src="data:image/jpeg;base64, ${reverseChanger(response.screenshot.data)}" alt="screenshot">`)
     reverseChanger(response.screenshot.data);
     console.log(reverseChanger(response.screenshot.data));
-    // $(divId).attr("background", "url('data:image/gif;base64, '" + reverseChanger(responnse.screenshot.data) + "'");
+    var imgB64 = "url('data:image/jpeg;base64, " + reverseChanger(response.screenshot.data) + "')";
+    //so the background image is working, but it makes
+    //the html look like garbage
+    $("#bg-pic-3").css("background-image", imgB64);
   });
   
 }
