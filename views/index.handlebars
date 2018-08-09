@@ -29,21 +29,29 @@
   </div>
 </div>
 
-<div class="sites">
+<div>
   {{#each user/0/urls}}
-    <div>
-      {{url}}
-    </div>
-    <div>
-      {{comment}}
-    </div>
-    <div>
-      {{filePath}}
-    </div>
-    <button class="peek-a-boo" data-site="{{url}}">{{url}}</button><hr>
+      <section class="url-house-{{uId}}">
+          <div class="url-grabber-{{uId}} url-{{uId}}">
+              {{url}}
+          </div>
+          <div class="url-grabber-{{uId}} comment-{{uId}}">
+              {{comment}}
+          </div>
+          <div class="url-grabber-{{uId}} path-{{uId}}">
+              {{filePath}}
+          </div>
+          <button class="see-me" data-site={{url}}>{{url}}</button>
+          <button class="change-me" data-id={{uId}} data-update="false">update {{uId}}</button>
+          <button class="delete-me" data-id={{uId}}>delete {{uId}}</button><hr>
+      </section>
   {{/each}}
+  <input id="id-me-up" placeholder="id here">
+  <input id="url-me-up" placeholder="url here">
+  <input id="comment-me-up" placeholder="comment here">
+  <input id="path-me-up" placeholder="path here">
+  <button id="submit-me">submit</button>
 </div>
-<div class="dump"></div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
