@@ -142,7 +142,7 @@ function getPageSpeedInsightsFor(URL, API_KEY, divId) {
     var imgB64 = "url('data:image/jpeg;base64, " + reverseChanger(response.screenshot.data) + "')";
     //so the background image is working, but it makes
     //the html look like garbage
-    $("#bg-pic-3").css("background-image", imgB64);
+    $("#" + divId).css("background-image", imgB64);
   });
   
 }
@@ -158,6 +158,21 @@ $(".peek-a-boo").click(function(){
     getPageSpeedInsightsFor("http://" + urlSeeker, apiKey);
   });
 });
+
+function baseInfection(){
+  $(".ajax-iterator").each(function(){
+    var targeter = $(this).attr("id");
+    console.log(targeter);
+    var urlPusher = $("section#" + targeter).find("div.url-spell").text().trim();
+    console.log(urlPusher);
+    $.ajax('/api/peeker/', {
+      type: "GET"
+    }).then(response => {
+      var apiKey = response.api_key;
+      getPageSpeedInsightsFor("http://" + urlPusher, apiKey, targeter);
+    });
+  });
+};
 
 //pushes a new url into the users array of objects for urls
 function hitMeUp(){
@@ -246,5 +261,6 @@ $(document).ready(function(){
   hitMeUp();
   deleteMeUp();
   updateInit();
+  baseInfection();
   console.log("yo");
 });
