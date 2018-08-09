@@ -258,6 +258,14 @@ function updateMeUp(idPlac, selectorTaker){
   });
 }
 
+$(".new-user").click(function(){
+  $.ajax('/api/mongo/user-new', {
+    type: "POST"
+  }).then(results =>{
+    console.log(results);
+  });
+});
+
 $(document).ready(function(){
   hitMeUp();
   deleteMeUp();
