@@ -124,7 +124,7 @@ function displayPageScore(result, status, xhr) {
 }
 
 //Gives display picture for page
-function getPageSpeedInsightsFor(URL, API_KEY) {
+function getPageSpeedInsightsFor(URL, API_KEY, divId) {
   var API_URL = 'https://www.googleapis.com/pagespeedonline/v2/runPagespeed?screenshot=true&strategy=mobile&';
   var query = [
     'url=' + URL,
@@ -134,11 +134,12 @@ function getPageSpeedInsightsFor(URL, API_KEY) {
     url: API_URL + query,
     type: "GET",
   }).then(function (response) {
-    // console.log(response.screenshot.data);
+    console.log(response.screenshot.data);
     $(".dump").empty();
     $(".dump").append(`<img src="data:image/jpeg;base64, ${reverseChanger(response.screenshot.data)}" alt="screenshot">`)
     reverseChanger(response.screenshot.data);
     console.log(reverseChanger(response.screenshot.data));
+    // $(divId).attr("background", "url('data:image/gif;base64, '" + reverseChanger(responnse.screenshot.data) + "'");
   });
   
 }
@@ -149,7 +150,6 @@ $(".peek-a-boo").click(function(){
   $.ajax("/api/peeker/", {
     type: "GET"
   }).then(response =>{
-    // console.log(response.api_key);
     console.log("hit");
     var apiKey = response.api_key;
     getPageSpeedInsightsFor("http://" + urlSeeker, apiKey);

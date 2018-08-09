@@ -25,7 +25,6 @@ module.exports = function(app) {
   });
 
   app.get("/api/peeker/", function(req, res){
-    console.log(keys.peeker)
     res.send(keys.peeker);
   })
 };
