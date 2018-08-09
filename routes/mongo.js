@@ -18,6 +18,18 @@ module.exports = function(app){
         })
     });
 
+    app.delete('/api/mongo/user-delete', function(req, res){
+        MongoClient.connect(url, function(err, db){
+            var collectionUser = db.collection('userInfo');
+            var collection = db.collection('urls');
+            collectionUser.remove({userName: "bob"}, {justOne: true}).then(function(){
+                collection.remove({userName: "bob"}, {justOne: true}).then(results =>{
+                    res.status(200).end();
+                });
+            });
+        });
+    });
+
     app.put('/api/mongo/new-url', function(req, res){
         MongoClient.connect(url, function(err, db){
             var collection = db.collection('urls');

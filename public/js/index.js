@@ -266,6 +266,14 @@ $(".new-user").click(function(){
   });
 });
 
+$(".delete-user").click(function(){
+  $.ajax('/api/mongo/user-delete', {
+    type: "DELETE"
+  }).then(results =>{
+    console.log(results);
+  });
+});
+
 $(document).ready(function(){
   hitMeUp();
   deleteMeUp();
