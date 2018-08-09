@@ -135,10 +135,10 @@ function getPageSpeedInsightsFor(URL, API_KEY, divId) {
     type: "GET",
   }).then(function (response) {
     console.log(response.screenshot.data);
-    $(".dump").empty();
-    $(".dump").append(`<img src="data:image/jpeg;base64, ${reverseChanger(response.screenshot.data)}" alt="screenshot">`)
-    reverseChanger(response.screenshot.data);
-    console.log(reverseChanger(response.screenshot.data));
+    // $(".dump").empty();
+    // $(".dump").append(`<img src="data:image/jpeg;base64, ${reverseChanger(response.screenshot.data)}" alt="screenshot">`)
+    // reverseChanger(response.screenshot.data);
+    // console.log(reverseChanger(response.screenshot.data));
     var imgB64 = "url('data:image/jpeg;base64, " + reverseChanger(response.screenshot.data) + "')";
     //so the background image is working, but it makes
     //the html look like garbage
@@ -148,16 +148,17 @@ function getPageSpeedInsightsFor(URL, API_KEY, divId) {
 }
 
 //button for display
-$(".peek-a-boo").click(function(){
-  urlSeeker = $(this).data("site");
-  $.ajax("/api/peeker/", {
-    type: "GET"
-  }).then(response =>{
-    console.log("hit");
-    var apiKey = response.api_key;
-    getPageSpeedInsightsFor("http://" + urlSeeker, apiKey);
-  });
-});
+// $(".peek-a-boo").click(function(){
+//   urlSeeker = $(this).data("site");
+//   $.ajax("/api/peeker/", {
+//     type: "GET"
+//   }).then(response =>{
+//     console.log("hit");
+//     var apiKey = response.api_key;
+//     getPageSpeedInsightsFor("http://" + urlSeeker, apiKey);
+//   });
+// });
+$(".peek-a-boo").text("intentionally broken");
 
 function baseInfection(){
   $(".ajax-iterator").each(function(){
