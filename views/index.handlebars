@@ -32,18 +32,22 @@
 <div>
   {{#each user/0/urls}}
       <section id="bg-pic-{{uId}}" class="url-house-{{uId}} ajax-iterator">
-          <div class="url-grabber-{{uId}} url-{{uId}} url-spell">
-              {{url}}
+          <div class="protecter-bg">
+            
+            <div class="url-grabber-{{uId}} url-{{uId}} url-spell">
+                {{url}}
+            </div>
+            <div class="url-grabber-{{uId}} comment-{{uId}}">
+                {{comment}}
+            </div>
+            <div class="url-grabber-{{uId}} path-{{uId}}">
+                {{filePath}}
+            </div>
+            <button class="peek-a-boo" data-site={{url}}>{{url}}</button>
+            <button class="change-me" data-id={{uId}} data-update="false">update {{uId}}</button>
+            <button class="delete-me" data-id={{uId}}>delete {{uId}}</button><hr>
+
           </div>
-          <div class="url-grabber-{{uId}} comment-{{uId}}">
-              {{comment}}
-          </div>
-          <div class="url-grabber-{{uId}} path-{{uId}}">
-              {{filePath}}
-          </div>
-          <button class="peek-a-boo" data-site={{url}}>{{url}}</button>
-          <button class="change-me" data-id={{uId}} data-update="false">update {{uId}}</button>
-          <button class="delete-me" data-id={{uId}}>delete {{uId}}</button><hr>
       </section>
   {{/each}}
   <input id="id-me-up" placeholder="id here">
