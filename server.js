@@ -26,6 +26,7 @@ app.set("view engine", "handlebars");
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 require("./routes/userUrls")(app);
+require("./routes/mongo")(app);
 
 var syncOptions = { force: false };
 
