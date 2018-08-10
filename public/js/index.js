@@ -134,7 +134,7 @@ function getPageSpeedInsightsFor(URL, API_KEY, divId) {
     url: API_URL + query,
     type: "GET",
   }).then(function (response) {
-    console.log(response.screenshot.data);
+    console.log("hit");
     // $(".dump").empty();
     // $(".dump").append(`<img src="data:image/jpeg;base64, ${reverseChanger(response.screenshot.data)}" alt="screenshot">`)
     // reverseChanger(response.screenshot.data);
@@ -143,6 +143,7 @@ function getPageSpeedInsightsFor(URL, API_KEY, divId) {
     //so the background image is working, but it makes
     //the html look like garbage
     $("#" + divId).css("background-image", imgB64);
+    console.log("fin");
   });
   
 }
@@ -171,8 +172,18 @@ function baseInfection(){
     }).then(response => {
       var apiKey = response.api_key;
       getPageSpeedInsightsFor("http://" + urlPusher, apiKey, targeter);
+      console.log("hit init");
     });
   });
+};
+
+function makeid(idType){
+  var text = idType + Math.round(new Date().getTime()/1000);
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (var i = 0; i < 10; i++){
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
 };
 
 //pushes a new url into the users array of objects for urls
@@ -180,7 +191,7 @@ function hitMeUp(){
   $("#submit-me").click(function(event){
       event.preventDefault();
       var urlPasser = {
-          uId: $("#id-me-up").val().trim(),
+          uId: makeid("url"),
           url: $("#url-me-up").val().trim(),
           comment: $("#comment-me-up").val().trim(),
           filePath: $("#path-me-up").val().trim()
@@ -258,14 +269,23 @@ function updateMeUp(idPlac, selectorTaker){
   });
 }
 
+
+//makes a new user. This needs to be dynamically functional
+//right now it is static
 $(".new-user").click(function(){
+  var newUseId = {
+    usId: makeid("user")
+  }
   $.ajax('/api/mongo/user-new', {
-    type: "POST"
+    type: "POST",
+    data: newUseId
   }).then(results =>{
     console.log(results);
   });
 });
 
+//deletes a user. This needs to be dynamically functional
+//right now it is static
 $(".delete-user").click(function(){
   $.ajax('/api/mongo/user-delete', {
     type: "DELETE"

@@ -12,23 +12,25 @@ module.exports = function(app) {
     var dbExPasser;
     db.Example.findAll({}).then(function(dbExamples) {
       dbExPasser = dbExamples;
+
+      MongoClient.connect(url, function(err, mdb){
+        console.log("connected to mdb");
+        var collection = mdb.collection('urls');
+        if(err) throw err;
+        assert.equal(null, err);
+        collection.find({userName: 'dreamwalker'})
+        .toArray(function(err, result){
+            if(err) throw err;
+            res.render("index", {
+              msg: "Welcome!",
+              examples: dbExPasser,
+              user: result
+            });
+        });
+      });
+      
     });
 
-    MongoClient.connect(url, function(err, mdb){
-      console.log("connected to mdb");
-      var collection = mdb.collection('urls');
-      if(err) throw err;
-      assert.equal(null, err);
-      collection.find({userName: 'dreamwalker'})
-      .toArray(function(err, result){
-          if(err) throw err;
-          res.render("index", {
-            msg: "Welcome!",
-            examples: dbExPasser,
-            user: result
-          });
-      });
-    });
     
   });
 
