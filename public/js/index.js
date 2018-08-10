@@ -118,9 +118,10 @@ var handleDeleteBtnClick = function() {
   });
 };
 
- // Add event listeners to the submit and delete buttons
- $submitBtn.on("click", handleFormSubmit);
- $exampleList.on("click", ".delete", handleDeleteBtnClick);
+// Add event listeners to the submit and delete buttons
+$submitBtn.on("click", handleFormSubmit);
+$exampleList.on("click", ".delete", handleDeleteBtnClick);
+
 
 function errorFunction(xhr, status, error) {
   if (xhr.responseJSON.error) {
@@ -131,18 +132,20 @@ function errorFunction(xhr, status, error) {
   }
   return;
 }
- function displayPageScore(result, status, xhr) {
+
+function displayPageScore(result, status, xhr) {
   score = result.ruleGroups.SPEED.score
   console.log(score);
 }
- //Gives display picture for page
+
+//Gives display picture for page
 function getPageSpeedInsightsFor(URL, API_KEY) {
   var API_URL = 'https://www.googleapis.com/pagespeedonline/v2/runPagespeed?screenshot=true&strategy=mobile&';
   var query = [
     'url=' + URL,
-     'key=' + API_KEY,
-   ].join('&');
-   $.ajax({
+    'key=' + API_KEY,
+  ].join('&');
+  $.ajax({
     url: API_URL + query,
     type: "GET",
   }).then(function (response) {
@@ -152,7 +155,9 @@ function getPageSpeedInsightsFor(URL, API_KEY) {
     reverseChanger(response.screenshot.data);
     console.log(reverseChanger(response.screenshot.data));
   });
+  
 }
+
 //button for display
 $(".peek-a-boo").click(function(){
   urlSeeker = $(this).data("site");
@@ -164,7 +169,4 @@ $(".peek-a-boo").click(function(){
     var apiKey = response.api_key;
     getPageSpeedInsightsFor("http://" + urlSeeker, apiKey);
   });
-
 });
-
-

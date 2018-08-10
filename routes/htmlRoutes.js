@@ -4,24 +4,26 @@ var keys = require('../keys.js'),
     url = keys.mongoDBUrl.mongo_url,
     assert = require('assert');
 require('dotenv').config();
- module.exports = function(app) {
-   // Load index page & database connection within
+
+module.exports = function(app) {
+  // Load index page & database connection within
   // a database connection
   app.get("/", function(req, res) {
     db.Example.findAll({}).then(function(dbExamples) {
       MongoClient.connect(url, function(err, mdb){
         console.log("connected to mdb");
-        var collection = mdb.collection('tester_db');
+        var collection = mdb.collection('urls');
         if(err) throw err;
         assert.equal(null, err);
         collection.find({userName: 'dreamwalker'})
         .toArray(function(err, result){
             if(err) throw err;
-            res.render("index", {
-              msg: "Welcome!",
-              examples: dbExamples,
-              user: result
-            });
+            // res.render("index", {
+            //   msg: "Welcome!",
+            //   examples: dbExamples,
+            //   user: result
+            // });
+            res.sendFile("react-test/test.html", {root: __dirname + "/.."});
         });
       });
     });

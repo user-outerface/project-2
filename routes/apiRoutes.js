@@ -24,7 +24,8 @@ require('dotenv').config();
       res.json(dbExample);
     });
   });
-   app.get("/api/peeker/", function(req, res){
+
+  app.get("/api/peeker/", function(req, res){
     console.log(keys.peeker)
     res.send(keys.peeker);
   })
