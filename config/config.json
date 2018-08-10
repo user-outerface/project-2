@@ -5,7 +5,7 @@
     "database": "exampledb",
     "host": "localhost",
     "dialect": "mysql",
-    "port": 27017
+    "port": 3307
   },
   "test": {
     "username": "root",

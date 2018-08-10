@@ -1,3 +1,7 @@
 .list-group-item {
   line-height: 2.5;
 }
+
+.protecter-bg {
+  background: rgba(245, 245, 245, 0.658)!important;
+}
