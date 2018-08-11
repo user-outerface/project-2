@@ -74,7 +74,7 @@ console.log(makeid());
 
 ```
 
-**On Creating A New Collection**
+# **On Creating A New Collection**
 
 The method for grabbing a collection will create a new collection if one doesn't exist.
  Eg. `db.getCollection("userInfo")` will create a new collection if it doesn't exist. You do have to populate it for it to be visible in the cli and gui though. For this, just populate it like you would normally.

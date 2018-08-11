@@ -1,7 +1,9 @@
 var db = require("../models");
 var passport = require("../config/passport");
 var keys = require('../keys.js');
+var url = keys.mongoDBUrl.mongo_url;
 var Sequelize = require("../models").sequelize;
+var MongoClient = require("mongodb").MongoClient;
 require('dotenv').config();
 
 module.exports = function (app) {
