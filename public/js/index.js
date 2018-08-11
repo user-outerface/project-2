@@ -3,28 +3,13 @@ var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
+//sets update switcher
+var urlUpdater = false;
 
 
 /*reverseChanger takes the response from the
 api and converts it to */
 function reverseChanger(oldStr){
-  // var newArr = oldArr.split("");
-  // console.log("hit");
-  // // console.log(newArr);
-  // for (var i = 0; i < newArr.length; i ++){
-  //     if(newArr[i] === "_"){
-  //         newArr[i] = "/";
-  //     } else if (newArr[i] === "-"){
-  //         newArr[i] = "+";
-  //     }
-  // }; 
-  // newArr = newArr.join("");
-  // console.log(newArr);
-  // var mapObj = {["_"]: "/", ["-"]: "+"};
-  // var re = new RegExp(Object.keys(mapObj).join("|"), "g");
-  // return oldStr.replace(re, function(matched){
-  //   return mapObj[matched];
-  // }); 
   return oldStr.replace(/_/g, "/").replace(/-/g, "+");
 };
 
@@ -139,7 +124,7 @@ function displayPageScore(result, status, xhr) {
 }
 
 //Gives display picture for page
-function getPageSpeedInsightsFor(URL, API_KEY) {
+function getPageSpeedInsightsFor(URL, API_KEY, divId) {
   var API_URL = 'https://www.googleapis.com/pagespeedonline/v2/runPagespeed?screenshot=true&strategy=mobile&';
   var query = [
     'url=' + URL,
@@ -149,24 +134,152 @@ function getPageSpeedInsightsFor(URL, API_KEY) {
     url: API_URL + query,
     type: "GET",
   }).then(function (response) {
-    // console.log(response.screenshot.data);
-    $(".dump").empty();
-    $(".dump").append(`<img src="data:image/jpeg;base64, ${reverseChanger(response.screenshot.data)}" alt="screenshot">`)
-    reverseChanger(response.screenshot.data);
-    console.log(reverseChanger(response.screenshot.data));
+    console.log("hit");
+    // $(".dump").empty();
+    // $(".dump").append(`<img src="data:image/jpeg;base64, ${reverseChanger(response.screenshot.data)}" alt="screenshot">`)
+    // reverseChanger(response.screenshot.data);
+    // console.log(reverseChanger(response.screenshot.data));
+    var imgB64 = "url('data:image/jpeg;base64, " + reverseChanger(response.screenshot.data) + "')";
+    //so the background image is working, but it makes
+    //the html look like garbage
+    $("#" + divId).css("background-image", imgB64);
+    console.log("fin");
   });
   
 }
 
 //button for display
-$(".peek-a-boo").click(function(){
-  urlSeeker = $(this).data("site");
-  $.ajax("/api/peeker/", {
-    type: "GET"
-  }).then(response =>{
-    // console.log(response.api_key);
-    console.log("hit");
-    var apiKey = response.api_key;
-    getPageSpeedInsightsFor("http://" + urlSeeker, apiKey);
+// $(".peek-a-boo").click(function(){
+//   urlSeeker = $(this).data("site");
+//   $.ajax("/api/peeker/", {
+//     type: "GET"
+//   }).then(response =>{
+//     console.log("hit");
+//     var apiKey = response.api_key;
+//     getPageSpeedInsightsFor("http://" + urlSeeker, apiKey);
+//   });
+// });
+$(".peek-a-boo").text("intentionally broken");
+
+function baseInfection(){
+  $(".ajax-iterator").each(function(){
+    var targeter = $(this).attr("id");
+    console.log(targeter);
+    var urlPusher = $("section#" + targeter).find("div.url-spell").text().trim();
+    console.log(urlPusher);
+    $.ajax('/api/peeker/', {
+      type: "GET"
+    }).then(response => {
+      var apiKey = response.api_key;
+      getPageSpeedInsightsFor("http://" + urlPusher, apiKey, targeter);
+      console.log("hit init");
+    });
   });
+};
+
+//pushes a new url into the users array of objects for urls
+function hitMeUp(){
+  $("#submit-me").click(function(event){
+      event.preventDefault();
+      var urlPasser = {
+          uId: $("#id-me-up").val().trim(),
+          url: $("#url-me-up").val().trim(),
+          comment: $("#comment-me-up").val().trim(),
+          filePath: $("#path-me-up").val().trim()
+      };
+      $.ajax("/api/mongo/new-url", {
+          type: "PUT",
+          data: urlPasser
+      }).then(function(){
+          location.reload();
+      });
+
+  });
+};
+
+//deletes urls from the users array of objects for urls
+function deleteMeUp(){
+  $(".delete-me").click(function(){
+      var idPass = {
+          uId: $(this).data("id")
+      };
+      $.ajax('/api/mongo/del-url', {
+          type: "PUT",
+          data: idPass
+      }).then(function(){
+          location.reload();
+      })
+  });
+}
+
+//initiates an update instance. Can save or cancel update at this point
+function updateInit(){
+  $(".change-me").click(function(){
+      if($(this).attr("data-update") === "true" || urlUpdater === true){
+          return;
+      };
+      urlUpdater = true;
+      $(this).attr("data-update", "true");
+      var idGab = $(this).data("id");
+      $(".url-grabber-" + idGab).replaceWith(function(){
+          return $(`<input class="${$(this).attr("class")}">`)
+          .val($(this).text().trim());
+      });
+      $(".url-house-" + idGab).append(`<button class="cancel-me delete-on-save">cancel</button>
+      <button class="save-me delete-on-save">Save</button><hr><hr>`);
+      selectorPasser = $(this);
+      updateCancel(idGab, selectorPasser);
+      updateMeUp(idGab, selectorPasser);
+  });
+}
+
+//cancels update
+function updateCancel(idPlac, selectorTaker){
+  $(".cancel-me").click(function(){
+      urlUpdater = false;
+      selectorTaker.attr("data-update", "false");
+      location.reload();
+  });
+}
+
+//saves update to database
+function updateMeUp(idPlac, selectorTaker){
+  $(".save-me").click(function(){
+      var newUrlParams = {
+          uId: idPlac,
+          url: $(".url-" + idPlac).val().trim(),
+          comment: $(".comment-" + idPlac).val().trim(),
+          filePath: $(".path-" + idPlac).val().trim()
+      }
+      $.ajax("/api/mongo/up-url", {
+          type: "PUT",
+          data: newUrlParams
+      }).then(results =>{
+          location.reload();
+      });
+  });
+}
+
+$(".new-user").click(function(){
+  $.ajax('/api/mongo/user-new', {
+    type: "POST"
+  }).then(results =>{
+    console.log(results);
+  });
+});
+
+$(".delete-user").click(function(){
+  $.ajax('/api/mongo/user-delete', {
+    type: "DELETE"
+  }).then(results =>{
+    console.log(results);
+  });
+});
+
+$(document).ready(function(){
+  hitMeUp();
+  deleteMeUp();
+  updateInit();
+  baseInfection();
+  console.log("yo");
 });

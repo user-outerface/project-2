@@ -3,7 +3,23 @@
     <div class="row">
       <div class="col-8 offset-2">
         <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
+        {{!-- Display username --}}
+        <h2>
+          <span class="member-name"></span> Home Page!</h2>
+
+        {{!-- Logout option --}}
+
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="/logout">
+                Logout
+              </a>
+            </div>
+          </div>
+        </nav>
+
+
         <form class="clearfix mb-4" action="POST">
           <div class="form-group">
             <label for="example-text">Example Text</label>
@@ -29,19 +45,36 @@
   </div>
 </div>
 
-<div class="sites">
+<button class="new-user">New User</button>
+<button class="delete-user">Delete User</button>
+
+<div>
   {{#each user/0/urls}}
-    <div>
-      {{url}}
+  <section id="bg-pic-{{uId}}" class="url-house-{{uId}} ajax-iterator">
+    <div class="protecter-bg">
+
+      <div class="url-grabber-{{uId}} url-{{uId}} url-spell">
+        {{url}}
+      </div>
+      <div class="url-grabber-{{uId}} comment-{{uId}}">
+        {{comment}}
+      </div>
+      <div class="url-grabber-{{uId}} path-{{uId}}">
+        {{filePath}}
+      </div>
+      <button class="peek-a-boo" data-site={{url}}>{{url}}</button>
+      <button class="change-me" data-id={{uId}} data-update="false">update {{uId}}</button>
+      <button class="delete-me" data-id={{uId}}>delete {{uId}}</button>
+      <hr>
+
     </div>
-    <div>
-      {{comment}}
-    </div>
-    <div>
-      {{filePath}}
-    </div>
-    <button class="peek-a-boo" data-site="{{url}}">{{url}}</button><hr>
+  </section>
   {{/each}}
+  <input id="id-me-up" placeholder="id here">
+  <input id="url-me-up" placeholder="url here">
+  <input id="comment-me-up" placeholder="comment here">
+  <input id="path-me-up" placeholder="path here">
+  <button id="submit-me">submit</button>
 </div>
 <div class="dump"></div>
 
