@@ -6,19 +6,6 @@ require('dotenv').config();
 
 module.exports = function (app) {
 
-    // app.post('/api/mongo/user-new', function (req, res) {
-    // MongoClient.connect(url, function (err, db) {
-    //     var usId = req.body.usId;
-    //     var collection = db.collection('urls');
-    //     collection.insert({
-    //         usId: req.user.foreignid,
-    //         userName: "bob"
-    //     }).then(results => {
-    //         res.status(200).end();
-    //     });
-    // })
-    // });
-
     app.delete('/api/mongo/user-delete', function (req, res) {
         MongoClient.connect(url, function (err, db) {
             var collection = db.collection('urls');

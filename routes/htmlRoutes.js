@@ -1,6 +1,7 @@
 // Requiring path to so we can use relative routes to our HTML files
 var path = require("path");
 var db = require("../models");
+var Sequelize = require('../models').sequelize;
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 var keys = require('../keys.js'),
   MongoClient = require('mongodb').MongoClient,
@@ -54,16 +55,13 @@ module.exports = function (app) {
           .toArray(function (err, result) {
             if (err) throw err;
             res.render("index", {
-              msg: "Welcome!",
+              msg: "BookMarkY!",
               quotes: dbQuotes,
               user: result
             });
           });
       });
-
     });
-
-
   });
 
   // Load quote page and pass in an quote by id
