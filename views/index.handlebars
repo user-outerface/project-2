@@ -10,7 +10,7 @@
         <h1>{{msg}}</h1>
         {{!-- Display username --}}
         <h2>
-          <span class="member-name"></span> Home Page!</h2>
+          <span class="member-name"></span>'s Home Page!</h2>
 
         {{!-- Logout option --}}
 
@@ -44,7 +44,7 @@
       </div>
     </div>
   </div>
-  
+
   <br>
   <div class="center">
     <input id="url-me-up" placeholder="url here">
@@ -55,26 +55,27 @@
   <div class="container">
     <div class="row">
       {{#each user/0/urls}}
-        <div class="col-4">
-          <div class="card-body">
-            <section id="bg-pic-{{uId}}" class="url-house-{{uId}} ajax-iterator">
-                <div class="protecter-bg">
-                  <div class="url-grabber-{{uId}} url-{{uId}} url-spell">
-                      {{url}}
-                  </div>
-                  <div class="url-grabber-{{uId}} comment-{{uId}}">
-                      {{comment}}
-                  </div>
-                  <div class="url-grabber-{{uId}} path-{{uId}}">
-                      {{filePath}}
-                  </div>
-                  <button class="peek-a-boo" data-site={{url}}>{{url}}</button>
-                  <button class="change-me" data-id={{uId}} data-update="false">update {{uId}}</button>
-                  <button class="delete-me" data-id={{uId}}>delete {{uId}}</button><hr>
-                </div>
-            </section>
-          </div>
+      <div class="col-4">
+        <div class="card-body">
+          <section id="bg-pic-{{uId}}" class="url-house-{{uId}} ajax-iterator">
+            <div class="protecter-bg">
+              <div class="url-grabber-{{uId}} url-{{uId}} url-spell">
+                {{url}}
+              </div>
+              <div class="url-grabber-{{uId}} comment-{{uId}}">
+                {{comment}}
+              </div>
+              <div class="url-grabber-{{uId}} path-{{uId}}">
+                {{filePath}}
+              </div>
+              <a type="button" class="peek-a-boo" href=https://{{url}}>{{url}}</a>
+              <button class="change-me" data-id={{uId}} data-update="false">update {{uId}}</button>
+              <button class="delete-me" data-id={{uId}}>delete {{uId}}</button>
+              <hr>
+            </div>
+          </section>
         </div>
+      </div>
       {{/each}}
     </div>
   </div>
@@ -83,3 +84,4 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/index.js"></script>
+<script src="/js/members.js"></script>

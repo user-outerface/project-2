@@ -186,7 +186,7 @@ function hitMeUp() {
     event.preventDefault();
     var urlPasser = {
       uId: makeid("url"),
-      url: $("#url-me-up").val().trim(),
+      url: $("#url-me-up").val().trim().replace('http://', '').replace('https://', '').replace('www.', '').split(/[/?#]/)[0],
       comment: $("#comment-me-up").val().trim(),
       filePath: $("#path-me-up").val().trim()
     };
