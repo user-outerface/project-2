@@ -153,7 +153,9 @@ function getPageSpeedInsightsFor(URL, API_KEY, divId) {
 //     getPageSpeedInsightsFor("http://" + urlSeeker, apiKey);
 //   });
 // });
-$(".peek-a-boo").text("intentionally broken");
+
+// Changed the "intentionally broken" button to a hyperlink
+$(".peek-a-boo").text("Take me there!");
 
 function baseInfection() {
   $(".ajax-iterator").each(function () {
@@ -187,7 +189,7 @@ function hitMeUp() {
     var urlPasser = {
       uId: makeid("url"),
       url: $("#url-me-up").val().trim().replace('http://', '').replace('https://', '').replace('www.', '').split(/[/?#]/)[0],
-      comment: $("#comment-me-up").val().trim(),
+      comment: $("#comment-me-up").val().trim(), // ^^^ Code above removes http, https and www to have a working hyperlink ^^^
       filePath: $("#path-me-up").val().trim()
     };
     $.ajax("/api/mongo/new-url", {

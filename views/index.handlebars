@@ -68,7 +68,10 @@
               <div class="url-grabber-{{uId}} path-{{uId}}">
                 {{filePath}}
               </div>
-              <a type="button" class="peek-a-boo" href=https://{{url}}>{{url}}</a>
+
+              {{!-- Changed the intentionally broken button to a hyperlink. --}} {{!-- It needs "https://" otherwise it will try to link
+              to localhost --}}
+              <a type="button" target="_blank" class="peek-a-boo" href=https://{{url}}>{{url}}</a>
               <button class="change-me" data-id={{uId}} data-update="false">update {{uId}}</button>
               <button class="delete-me" data-id={{uId}}>delete {{uId}}</button>
               <hr>
