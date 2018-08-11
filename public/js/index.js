@@ -1,8 +1,8 @@
 // Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
+var $quoteText = $("#quote-text");
+var $quoteDescription = $("#quote-description");
 var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
+var $quoteList = $("#quote-list");
 //sets update switcher
 var urlUpdater = false;
 
@@ -15,42 +15,42 @@ function reverseChanger(oldStr){
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveExample: function(example) {
+  saveQuote: function(quote) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
+      url: "api/quotes",
+      data: JSON.stringify(quote)
     });
   },
-  getExamples: function() {
+  getQuotes: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/quotes",
       type: "GET"
     });
   },
-  deleteExample: function(id) {
+  deleteQuote: function(id) {
     return $.ajax({
-      url: "api/examples/" + id,
+      url: "api/quotes/" + id,
       type: "DELETE"
     });
   }
 };
 
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
+// refreshQuotes gets new quotes from the db and repopulates the list
+var refreshQuotes = function() {
+  API.getQuotes().then(function(data) {
+    var $quotes = data.map(function(quote) {
       var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
+        .text(quote.text)
+        .attr("href", "/quote/" + quote.id);
 
       var $li = $("<li>")
         .attr({
           class: "list-group-item",
-          "data-id": example.id
+          "data-id": quote.id
         })
         .append($a);
 
@@ -63,49 +63,49 @@ var refreshExamples = function() {
       return $li;
     });
 
-    $exampleList.empty();
-    $exampleList.append($examples);
+    $quoteList.empty();
+    $quoteList.append($quotes);
   });
 };
 
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
+// handleFormSubmit is called whenever we submit a new quote
+// Save the new quote to the db and refresh the list
 var handleFormSubmit = function(event) {
   event.preventDefault();
 
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+  var quote = {
+    text: $quoteText.val().trim(),
+    description: $quoteDescription.val().trim()
   };
 
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
+  if (!(quote.text && quote.description)) {
+    alert("You must enter an quote text and description!");
     return;
   }
 
-  API.saveExample(example).then(function() {
-    refreshExamples();
+  API.saveQuote(quote).then(function() {
+    refreshQuotes();
   });
 
-  $exampleText.val("");
-  $exampleDescription.val("");
+  $quoteText.val("");
+  $quoteDescription.val("");
 };
 
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
+// handleDeleteBtnClick is called when an quote's delete button is clicked
+// Remove the quote from the db and refresh the list
 var handleDeleteBtnClick = function() {
   var idToDelete = $(this)
     .parent()
     .attr("data-id");
 
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
+  API.deleteQuote(idToDelete).then(function() {
+    refreshQuotes();
   });
 };
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+$quoteList.on("click", ".delete", handleDeleteBtnClick);
 
 
 function errorFunction(xhr, status, error) {

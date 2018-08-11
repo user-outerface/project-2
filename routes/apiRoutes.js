@@ -3,24 +3,24 @@ var keys = require('../keys.js');
 require('dotenv').config();
 
 module.exports = function(app) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
+  // Get all quotes
+  app.get("/api/quotes", function(req, res) {
+    db.Quote.findAll({}).then(function(dbQuotes) {
+      res.json(dbQuotes);
     });
   });
 
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
+  // Create a new quote
+  app.post("/api/quotes", function(req, res) {
+    db.Quote.create(req.body).then(function(dbQuote) {
+      res.json(dbQuote);
     });
   });
 
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.json(dbExample);
+  // Delete an quote by id
+  app.delete("/api/quotes/:id", function(req, res) {
+    db.Quote.destroy({ where: { id: req.params.id } }).then(function(dbQuote) {
+      res.json(dbQuote);
     });
   });
 

@@ -9,9 +9,7 @@ module.exports = function(app) {
   // Load index page & database connection within
   // a database connection
   app.get("/", function(req, res) {
-    var dbExPasser;
-    db.Example.findAll({}).then(function(dbExamples) {
-      dbExPasser = dbExamples;
+    db.Quote.findAll({}).then(function(dbQuotes) {
 
       MongoClient.connect(url, function(err, mdb){
         console.log("connected to mdb");
@@ -23,22 +21,22 @@ module.exports = function(app) {
             if(err) throw err;
             res.render("index", {
               msg: "Welcome!",
-              examples: dbExPasser,
+              quotes: dbQuotes,
               user: result
             });
         });
       });
-      
+
     });
 
     
   });
 
-  // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.render("example", {
-        example: dbExample
+  // Load quote page and pass in an quote by id
+  app.get("/quote/:id", function(req, res) {
+    db.Quote.findOne({ where: { id: req.params.id } }).then(function(dbQuote) {
+      res.render("quote", {
+        quote: dbQuote
       });
     });
   });
