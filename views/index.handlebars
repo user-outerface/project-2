@@ -1,21 +1,24 @@
 <div id="home">
   <div class="container">
+    <div id="top-right">
+      <button class="new-user">New User</button>
+      <button class="delete-user">Delete User</button>
+    </div>
     <div class="row">
       <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
-        <form class="clearfix mb-4" action="POST">
+        <h1 class="center">{{msg}}</h1>
+        <form class="clearfix mb-4 center" action="POST">
           <div class="form-group">
-            <label for="quote-text">Quote Text</label>
-            <input type="text" id="quote-text" class="form-control" aria-describedby="quote-text" placeholder="Enter Quote Text">
+            <label for="quote-text">Inspire Yourself!</label>
+            <input type="text" id="quote-text" class="form-control" aria-describedby="quote-text" placeholder="Save Quotes Here For Later">
           </div>
           <button id="submit" class="btn btn-primary float-right">Submit</button>
         </form>
-        <h3>Quotes:</h3>
+        <h3 class="center">:Git Inspired:</h3>
         <ul id="quote-list" class="list-group">
           {{#each quotes}}
           <li data-id="{{this.id}}" class="list-group-item">
-            <a href="quote/{{this.id}}">{{this.text}}</a>
+            <p href="quote/{{this.id}}">{{this.text}}</p>
             <button class="btn btn-danger float-right delete">ｘ</button>
           </li>
           {{/each}}
@@ -23,36 +26,38 @@
       </div>
     </div>
   </div>
-</div>
-
-<button class="new-user">New User</button>
-<button class="delete-user">Delete User</button>
-
-<div>
-  {{#each user/0/urls}}
-      <section id="bg-pic-{{uId}}" class="url-house-{{uId}} ajax-iterator">
-          <div class="protecter-bg">
-            
-            <div class="url-grabber-{{uId}} url-{{uId}} url-spell">
-                {{url}}
-            </div>
-            <div class="url-grabber-{{uId}} comment-{{uId}}">
-                {{comment}}
-            </div>
-            <div class="url-grabber-{{uId}} path-{{uId}}">
-                {{filePath}}
-            </div>
-            <button class="peek-a-boo" data-site={{url}}>{{url}}</button>
-            <button class="change-me" data-id={{uId}} data-update="false">update {{uId}}</button>
-            <button class="delete-me" data-id={{uId}}>delete {{uId}}</button><hr>
-
-          </div>
-      </section>
-  {{/each}}
-  <input id="url-me-up" placeholder="url here">
-  <input id="comment-me-up" placeholder="comment here">
-  <input id="path-me-up" placeholder="path here">
-  <button id="submit-me">submit</button>
+  <br>
+  <div class="center">
+    <input id="url-me-up" placeholder="url here">
+    <input id="comment-me-up" placeholder="comment here">
+    <input id="path-me-up" placeholder="path here">
+    <button id="submit-me">submit</button>
+  </div>
+<div class="container">
+  <div class="row">
+    {{#each user/0/urls}}
+      <div class="col-4">
+        <div class="card-body">
+          <section id="bg-pic-{{uId}}" class="url-house-{{uId}} ajax-iterator">
+              <div class="protecter-bg">
+                <div class="url-grabber-{{uId}} url-{{uId}} url-spell">
+                    {{url}}
+                </div>
+                <div class="url-grabber-{{uId}} comment-{{uId}}">
+                    {{comment}}
+                </div>
+                <div class="url-grabber-{{uId}} path-{{uId}}">
+                    {{filePath}}
+                </div>
+                <button class="peek-a-boo" data-site={{url}}>{{url}}</button>
+                <button class="change-me" data-id={{uId}} data-update="false">update {{uId}}</button>
+                <button class="delete-me" data-id={{uId}}>delete {{uId}}</button><hr>
+              </div>
+          </section>
+        </div>
+      </div>
+    {{/each}}
+  </div>
 </div>
 <div class="dump"></div>
 

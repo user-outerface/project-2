@@ -1,4 +1,5 @@
 var db = require("../models");
+var Sequelize = require('../models').sequelize;
 var keys = require('../keys.js'),
     MongoClient = require('mongodb').MongoClient,
     url = keys.mongoDBUrl.mongo_url,
@@ -16,7 +17,6 @@ module.exports = function(app) {
       ],
       limit: 1
     }).then(function(dbQuotes) {
-
       MongoClient.connect(url, function(err, mdb){
         console.log("connected to mdb");
         var collection = mdb.collection('urls');
@@ -26,16 +26,13 @@ module.exports = function(app) {
         .toArray(function(err, result){
             if(err) throw err;
             res.render("index", {
-              msg: "Welcome!",
+              msg: "BookMarkY!",
               quotes: dbQuotes,
               user: result
             });
         });
       });
-
     });
-
-    
   });
 
   // Load quote page and pass in an quote by id

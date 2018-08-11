@@ -1,5 +1,3 @@
-DROP DATABASE IF EXISTS exampledb;
-CREATE DATABASE exampledb;
+CREATE DATABASE quotes;
 
-DROP DATABASE IF EXISTS testdb;
-CREATE DATABASE testdb;
+USE quotes;
