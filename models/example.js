@@ -1,7 +1,16 @@
 module.exports = function(sequelize, DataTypes) {
-  var Example = sequelize.define("Example", {
-    text: DataTypes.STRING,
-    description: DataTypes.TEXT
+  var Quote = sequelize.define("Quote", {
+    words: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [1, 140]
+      },
+      complete: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
+      }
+    }
   });
-  return Example;
+  return Quote;
 };

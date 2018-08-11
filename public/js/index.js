@@ -70,6 +70,20 @@ var refreshExamples = function() {
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
+
+$('#quoteSubmit').click(function(){
+  var newQuote = {
+    words: $('#formInput').val().trim()
+  } 
+  $.ajax("/api/new/comment", {
+    type: "POST",
+    data: newQuote
+  }).then(results =>{
+    $('#formInput').val('');
+    console.log("new word" + results)
+  });
+});
+
 var handleFormSubmit = function(event) {
   event.preventDefault();
 

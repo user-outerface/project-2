@@ -1,4 +1,5 @@
 var db = require("../models");
+var Sequelize = require('../models').sequelize;
 var keys = require('../keys.js'),
     MongoClient = require('mongodb').MongoClient,
     url = keys.mongoDBUrl.mongo_url,
@@ -9,27 +10,31 @@ module.exports = function(app) {
   // Load index page & database connection within
   // a database connection
   app.get("/", function(req, res) {
-    var dbExPasser;
-    db.Example.findAll({}).then(function(dbExamples) {
-      dbExPasser = dbExamples;
+    db.Quote.findAll({ 
+      order: [
+        Sequelize.fn( 'RAND' )
+      ], 
+      limit: 1
+     }).then(function(dbQuotes) {
+      MongoClient.connect(url, function(err, mdb){
+        console.log("connected to mdb");
+        var collection = mdb.collection('urls');
+        if(err) throw err;
+        assert.equal(null, err);
+        collection.find({userName: 'dreamwalker'})
+        .toArray(function(err, result){
+            if(err) throw err;
+            console.log(dbQuotes);
+            res.render("index", {
+              msg: "BookMarkY!",
+              quotes: dbQuotes,
+              user: result
+            });
+        });
+      });
+
     });
 
-    MongoClient.connect(url, function(err, mdb){
-      console.log("connected to mdb");
-      var collection = mdb.collection('urls');
-      if(err) throw err;
-      assert.equal(null, err);
-      collection.find({userName: 'dreamwalker'})
-      .toArray(function(err, result){
-          if(err) throw err;
-          res.render("index", {
-            msg: "Welcome!",
-            examples: dbExPasser,
-            user: result
-          });
-      });
-    });
-    
   });
 
   // Load example page and pass in an example by id
