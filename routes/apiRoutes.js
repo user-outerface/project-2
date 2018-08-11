@@ -1,31 +1,34 @@
 var db = require("../models");
 var passport = require("../config/passport");
 var keys = require('../keys.js');
+var MongoClient = require('mongodb').MongoClient,
+  url = keys.mongoDBUrl.mongo_url,
+  assert = require('assert');
 require('dotenv').config();
 
 module.exports = function (app) {
-  // Get all examples
-  app.get("/api/examples", function (req, res) {
-    db.Example.findAll({}).then(function (dbExamples) {
-      res.json(dbExamples);
+  // Get all quotes
+  app.get("/api/quotes", function (req, res) {
+    db.Quote.findAll({}).then(function (dbQuotes) {
+      res.json(dbQuotes);
     });
   });
 
-  // Create a new example
-  app.post("/api/examples", function (req, res) {
-    db.Example.create(req.body).then(function (dbExample) {
-      res.json(dbExample);
+  // Create a new quote
+  app.post("/api/quotes", function (req, res) {
+    db.Quote.create(req.body).then(function (dbQuote) {
+      res.json(dbQuote);
     });
   });
 
-  // Delete an example by id
-  app.delete("/api/examples/:id", function (req, res) {
-    db.Example.destroy({
+  // Delete an quote by id
+  app.delete("/api/quotes/:id", function (req, res) {
+    db.Quote.destroy({
       where: {
         id: req.params.id
       }
-    }).then(function (dbExample) {
-      res.json(dbExample);
+    }).then(function (dbQuote) {
+      res.json(dbQuote);
     });
   });
 
@@ -47,11 +50,23 @@ module.exports = function (app) {
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
   app.post("/api/signup", function (req, res) {
-    console.log(req.body);
+    var mongoloid = req.body.username;
+    var mongoId = req.body.foreignid;
     db.User.create({
-      email: req.body.email,
-      password: req.body.password
+      username: req.body.username,
+      password: req.body.password,
+      foreignid: req.body.foreignid
     }).then(function () {
+      console.log(req.body.foreignid + "YAAAAASSSSSS");
+
+      MongoClient.connect(url, function (err, db) {
+        var collection = db.collection('urls');
+        collection.insert({
+          usId: mongoId,
+          userName: mongoloid,
+        });
+      })
+
       res.redirect(307, "/api/login");
     }).catch(function (err) {
       console.log(err);
@@ -72,10 +87,10 @@ module.exports = function (app) {
       // The user is not logged in, send back an empty object
       res.json({});
     } else {
-      // Otherwise send back the user's email and id
+      // Otherwise send back the user's username and id
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
-        email: req.user.email,
+        username: req.user.username,
         id: req.user.id
       });
     }

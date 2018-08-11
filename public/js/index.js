@@ -1,56 +1,56 @@
 // Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
+var $quoteText = $("#quote-text");
+var $quoteDescription = $("#quote-description");
 var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
+var $quoteList = $("#quote-list");
 //sets update switcher
 var urlUpdater = false;
 
 
 /*reverseChanger takes the response from the
 api and converts it to */
-function reverseChanger(oldStr){
+function reverseChanger(oldStr) {
   return oldStr.replace(/_/g, "/").replace(/-/g, "+");
 };
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveExample: function(example) {
+  saveQuote: function (quote) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
+      url: "api/quotes",
+      data: JSON.stringify(quote)
     });
   },
-  getExamples: function() {
+  getQuotes: function () {
     return $.ajax({
-      url: "api/examples",
+      url: "api/quotes",
       type: "GET"
     });
   },
-  deleteExample: function(id) {
+  deleteQuote: function (id) {
     return $.ajax({
-      url: "api/examples/" + id,
+      url: "api/quotes/" + id,
       type: "DELETE"
     });
   }
 };
 
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
+// refreshQuotes gets new quotes from the db and repopulates the list
+var refreshQuotes = function () {
+  API.getQuotes().then(function (data) {
+    var $quotes = data.map(function (quote) {
       var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
+        .text(quote.text)
+        .attr("href", "/quote/" + quote.id);
 
       var $li = $("<li>")
         .attr({
           class: "list-group-item",
-          "data-id": example.id
+          "data-id": quote.id
         })
         .append($a);
 
@@ -63,49 +63,43 @@ var refreshExamples = function() {
       return $li;
     });
 
-    $exampleList.empty();
-    $exampleList.append($examples);
+    $quoteList.empty();
+    $quoteList.append($quotes);
   });
 };
 
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
+// handleFormSubmit is called whenever we submit a new quote
+// Save the new quote to the db and refresh the list
+var handleFormSubmit = function (event) {
   event.preventDefault();
 
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+  var quote = {
+    text: $quoteText.val().trim()
   };
 
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
-    return;
-  }
-
-  API.saveExample(example).then(function() {
-    refreshExamples();
+  API.saveQuote(quote).then(function () {
+    refreshQuotes();
   });
 
-  $exampleText.val("");
-  $exampleDescription.val("");
+  $quoteText.val("");
+  $quoteDescription.val("");
 };
 
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
+// handleDeleteBtnClick is called when an quote's delete button is clicked
+// Remove the quote from the db and refresh the list
+var handleDeleteBtnClick = function () {
   var idToDelete = $(this)
     .parent()
     .attr("data-id");
 
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
+  API.deleteQuote(idToDelete).then(function () {
+    refreshQuotes();
   });
 };
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+$quoteList.on("click", ".delete", handleDeleteBtnClick);
 
 
 function errorFunction(xhr, status, error) {
@@ -145,7 +139,7 @@ function getPageSpeedInsightsFor(URL, API_KEY, divId) {
     $("#" + divId).css("background-image", imgB64);
     console.log("fin");
   });
-  
+
 }
 
 //button for display
@@ -161,8 +155,8 @@ function getPageSpeedInsightsFor(URL, API_KEY, divId) {
 // });
 $(".peek-a-boo").text("intentionally broken");
 
-function baseInfection(){
-  $(".ajax-iterator").each(function(){
+function baseInfection() {
+  $(".ajax-iterator").each(function () {
     var targeter = $(this).attr("id");
     console.log(targeter);
     var urlPusher = $("section#" + targeter).find("div.url-spell").text().trim();
@@ -177,106 +171,124 @@ function baseInfection(){
   });
 };
 
+function makeid(idType) {
+  var text = idType + Math.round(new Date().getTime() / 1000);
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (var i = 0; i < 10; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+};
+
 //pushes a new url into the users array of objects for urls
-function hitMeUp(){
-  $("#submit-me").click(function(event){
-      event.preventDefault();
-      var urlPasser = {
-          uId: $("#id-me-up").val().trim(),
-          url: $("#url-me-up").val().trim(),
-          comment: $("#comment-me-up").val().trim(),
-          filePath: $("#path-me-up").val().trim()
-      };
-      $.ajax("/api/mongo/new-url", {
-          type: "PUT",
-          data: urlPasser
-      }).then(function(){
-          location.reload();
-      });
+function hitMeUp() {
+  $("#submit-me").click(function (event) {
+    event.preventDefault();
+    var urlPasser = {
+      uId: makeid("url"),
+      url: $("#url-me-up").val().trim(),
+      comment: $("#comment-me-up").val().trim(),
+      filePath: $("#path-me-up").val().trim()
+    };
+    $.ajax("/api/mongo/new-url", {
+      type: "PUT",
+      data: urlPasser
+    }).then(function () {
+      location.reload();
+    });
 
   });
 };
 
 //deletes urls from the users array of objects for urls
-function deleteMeUp(){
-  $(".delete-me").click(function(){
-      var idPass = {
-          uId: $(this).data("id")
-      };
-      $.ajax('/api/mongo/del-url', {
-          type: "PUT",
-          data: idPass
-      }).then(function(){
-          location.reload();
-      })
+function deleteMeUp() {
+  $(".delete-me").click(function () {
+    var idPass = {
+      uId: $(this).data("id")
+    };
+    $.ajax('/api/mongo/del-url', {
+      type: "PUT",
+      data: idPass
+    }).then(function () {
+      location.reload();
+    })
   });
 }
 
 //initiates an update instance. Can save or cancel update at this point
-function updateInit(){
-  $(".change-me").click(function(){
-      if($(this).attr("data-update") === "true" || urlUpdater === true){
-          return;
-      };
-      urlUpdater = true;
-      $(this).attr("data-update", "true");
-      var idGab = $(this).data("id");
-      $(".url-grabber-" + idGab).replaceWith(function(){
-          return $(`<input class="${$(this).attr("class")}">`)
-          .val($(this).text().trim());
-      });
-      $(".url-house-" + idGab).append(`<button class="cancel-me delete-on-save">cancel</button>
+function updateInit() {
+  $(".change-me").click(function () {
+    if ($(this).attr("data-update") === "true" || urlUpdater === true) {
+      return;
+    };
+    urlUpdater = true;
+    $(this).attr("data-update", "true");
+    var idGab = $(this).data("id");
+    $(".url-grabber-" + idGab).replaceWith(function () {
+      return $(`<input class="${$(this).attr("class")}">`)
+        .val($(this).text().trim());
+    });
+    $(".url-house-" + idGab).append(`<button class="cancel-me delete-on-save">cancel</button>
       <button class="save-me delete-on-save">Save</button><hr><hr>`);
-      selectorPasser = $(this);
-      updateCancel(idGab, selectorPasser);
-      updateMeUp(idGab, selectorPasser);
+    selectorPasser = $(this);
+    updateCancel(idGab, selectorPasser);
+    updateMeUp(idGab, selectorPasser);
   });
 }
 
 //cancels update
-function updateCancel(idPlac, selectorTaker){
-  $(".cancel-me").click(function(){
-      urlUpdater = false;
-      selectorTaker.attr("data-update", "false");
-      location.reload();
+function updateCancel(idPlac, selectorTaker) {
+  $(".cancel-me").click(function () {
+    urlUpdater = false;
+    selectorTaker.attr("data-update", "false");
+    location.reload();
   });
 }
 
 //saves update to database
-function updateMeUp(idPlac, selectorTaker){
-  $(".save-me").click(function(){
-      var newUrlParams = {
-          uId: idPlac,
-          url: $(".url-" + idPlac).val().trim(),
-          comment: $(".comment-" + idPlac).val().trim(),
-          filePath: $(".path-" + idPlac).val().trim()
-      }
-      $.ajax("/api/mongo/up-url", {
-          type: "PUT",
-          data: newUrlParams
-      }).then(results =>{
-          location.reload();
-      });
+function updateMeUp(idPlac, selectorTaker) {
+  $(".save-me").click(function () {
+    var newUrlParams = {
+      uId: idPlac,
+      url: $(".url-" + idPlac).val().trim(),
+      comment: $(".comment-" + idPlac).val().trim(),
+      filePath: $(".path-" + idPlac).val().trim()
+    }
+    $.ajax("/api/mongo/up-url", {
+      type: "PUT",
+      data: newUrlParams
+    }).then(results => {
+      location.reload();
+    });
   });
 }
 
-$(".new-user").click(function(){
+
+//makes a new user. This needs to be dynamically functional
+//right now it is static
+$(".new-user").click(function () {
+  var newUseId = {
+    usId: makeid("user")
+  }
   $.ajax('/api/mongo/user-new', {
-    type: "POST"
-  }).then(results =>{
+    type: "POST",
+    data: newUseId
+  }).then(results => {
     console.log(results);
   });
 });
 
-$(".delete-user").click(function(){
+//deletes a user. This needs to be dynamically functional
+//right now it is static
+$(".delete-user").click(function () {
   $.ajax('/api/mongo/user-delete', {
     type: "DELETE"
-  }).then(results =>{
+  }).then(results => {
     console.log(results);
   });
 });
 
-$(document).ready(function(){
+$(document).ready(function () {
   hitMeUp();
   deleteMeUp();
   updateInit();

@@ -37,7 +37,6 @@ app.set("view engine", "handlebars");
 // Routes
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
-require("./routes/userUrls")(app);
 require("./routes/mongo")(app);
 
 var syncOptions = {
