@@ -8,10 +8,11 @@ module.exports = function(app){
 
     app.post('/api/mongo/user-new', function(req, res){
         MongoClient.connect(url, function(err, db){
+            var usId = req.body.usId;
             var collectionUser = db.collection('userInfo');
             var collection = db.collection('urls');
-            collectionUser.insert({userName: "bob"}).then(function(){
-                collection.insert({userName: "bob"}).then(results => {
+            collectionUser.insert({foreignid: usId, userName: "bob"}).then(function(){
+                collection.insert({foreignid: usId, userName: "bob"}).then(results => {
                     res.status(200).end();
                 });
             });

@@ -1,13 +1,27 @@
-<div class="text-center">
-  <h1>BookMarkY</h1>
-  <ul>
-    {{#each quotes}}
-        <p>Quotes: {{words}}</p>
-    {{/each}}
-  </ul>
-    <textarea id="formInput" type="text" name="task" placeholder="Add a quote to add to the random quotes..."></textarea>
-
-    <button id="quoteSubmit" type="submit">Submit</button>
+<div id="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 offset-2">
+        <h1>{{msg}}</h1>
+        <h2>This is our Home Page!</h2>
+        <form class="clearfix mb-4" action="POST">
+          <div class="form-group">
+            <label for="quote-text">Quote Text</label>
+            <input type="text" id="quote-text" class="form-control" aria-describedby="quote-text" placeholder="Enter Quote Text">
+          </div>
+          <button id="submit" class="btn btn-primary float-right">Submit</button>
+        </form>
+        <h3>Quotes:</h3>
+        <ul id="quote-list" class="list-group">
+          {{#each quotes}}
+          <li data-id="{{this.id}}" class="list-group-item">
+            <a href="quote/{{this.id}}">{{this.text}}</a>
+            <button class="btn btn-danger float-right delete">ｘ</button>
+          </li>
+          {{/each}}
+        </ul>
+      </div>
+    </div>
   </div>
 
 <button class="new-user">New User</button>
@@ -34,7 +48,6 @@
           </div>
       </section>
   {{/each}}
-  <input id="id-me-up" placeholder="id here">
   <input id="url-me-up" placeholder="url here">
   <input id="comment-me-up" placeholder="comment here">
   <input id="path-me-up" placeholder="path here">
