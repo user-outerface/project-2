@@ -4,11 +4,16 @@
 
 .protecter-bg {
   background: rgba(245, 245, 245, 0.658) !important;
+  border-radius: 10px;
 }
-
-form.signup,
-form.login {
-  margin-top: 50px;
+div.protecter-bg {
+  background: rgba(245, 245, 245, 0.658) !important;
+  border-radius: 10px;
+  
+}
+#ajax-iterator {
+    border-radius: 10px;
+    border-style: solid;
 }
 
 .center {
@@ -18,3 +23,270 @@ form.login {
 #top-right {
   text-align: right;
 }
+
+body{
+   background: url("../../img/desktop-computer-wallpapers-8.jpg");
+}
+
+#title{
+  color: rgb(0, 247, 255);
+     text-shadow: 1px 1px 2px black,
+     0 0 25px rgb(6, 219, 131),
+     0 0 5px rgb(111, 250, 255);
+}
+
+.sign{
+  color: rgb(0, 247, 255);
+    text-shadow: 1px 1px 2px black,
+    0 0 25px rgb(6, 219, 131),
+    0 0 5px rgb(111, 250, 255);
+   text-align: center;
+}
+
+#log{
+  
+    color : rgb(255, 255, 255);
+    text-shadow: 1px 1px 2px black,
+    0 0 25px blue,
+    0 0 5px darkblue;
+}
+
+#here {
+  color: rgb(0, 240, 248);
+
+  text-shadow: 1px 1px 2px black,
+  0 0 25px blue,
+  0 0 5px darkblue;
+}
+
+#username-input{
+  width: 400px;
+  text-align: center;
+
+}
+
+#password-input {
+  width: 400px;
+  text-align: center;
+
+}
+
+.pizza {
+  margin-left: 608px;
+}
+ #move{
+margin-top: 5%
+ }
+
+ #url-me-up {
+   border-radius: 10px;
+   text-align: center;
+ }
+ #comment-me-up {
+   border-radius: 10px;
+   text-align: center;
+ }
+ #path-me-up {
+   border-radius: 10px;
+   text-align: center;
+ }
+ #submit-me{
+    border-radius: 10px;
+    text-align: center;
+ }
+
+ .url-urls{
+   height: 400px;
+ }
+.peek-a-boo{
+
+}
+ .change-me{
+
+ }
+ .delete-me{
+
+ }
+
+.delete-me {
+    margin-left:10px;
+  margin-top:10px;
+   font-weight: bold;
+   text-decoration: none;
+   font-family: Arial;
+   box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 4px 6px;
+   o-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 4px 6px;
+   -moz-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 4px 6px;
+   -webkit-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 4px 6px;
+   background: #7fe3a9;
+   background: -o-linear-gradient(90deg, #7fe3a9, #438b99);
+   background: -moz-linear-gradient( center top, #7fe3a9 5%, #438b99 100%);
+   background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #7fe3a9), color-stop(1, #438b99));
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7fe3a9', endColorstr='#438b99');
+   background: -webkit-linear-gradient(#7fe3a9, #438b99);
+   background: -ms-linear-gradient(#7fe3a9, #438b99);
+   background: linear-gradient(#7fe3a9, #438b99);
+   text-indent: 0px;
+   line-height: 0px;
+   -moz-border-radius: 3px;
+   -webkit-border-radius: 3px;
+   border-radius: 3px;
+   text-align: center;
+   vertical-align: middle;
+   display: inline-block;
+   font-size: 12px;
+   color: #0a090a;
+
+   height: 0px;
+   padding: 13px;
+   border-color: #2e2e2e;
+   border-width: 1px;
+   border-style: solid;
+ }
+
+
+.delete-me :active {
+   box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 0 6px;
+   o-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 0 6px;
+   -moz-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 0 6px;
+   -webkit-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 0 6px;
+   position: relative;
+   top: 4px
+ }
+
+
+.delete-me :hover {
+   background: #438b99;
+   background: -o-linear-gradient(90deg, #438b99, #7fe3a9);
+   background: -moz-linear-gradient( center top, #438b99 5%, #7fe3a9 100%);
+   background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #438b99), color-stop(1, #7fe3a9));
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#438b99', endColorstr='#7fe3a9');
+   background: -webkit-linear-gradient(#438b99, #7fe3a9);
+   background: -ms-linear-gradient(#438b99, #7fe3a9);
+   background: linear-gradient(#438b99, #7fe3a9);
+ }
+
+.change-me {
+  margin-left:10px;
+    margin-top:10px;
+   font-weight: bold;
+   text-decoration: none;
+   font-family: Arial;
+   box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 4px 6px;
+   o-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 4px 6px;
+   -moz-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 4px 6px;
+   -webkit-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 4px 6px;
+   background: #7fe3a9;
+   background: -o-linear-gradient(90deg, #7fe3a9, #438b99);
+   background: -moz-linear-gradient( center top, #7fe3a9 5%, #438b99 100%);
+   background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #7fe3a9), color-stop(1, #438b99));
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7fe3a9', endColorstr='#438b99');
+   background: -webkit-linear-gradient(#7fe3a9, #438b99);
+   background: -ms-linear-gradient(#7fe3a9, #438b99);
+   background: linear-gradient(#7fe3a9, #438b99);
+   text-indent: 0px;
+   line-height: 0px;
+   -moz-border-radius: 3px;
+   -webkit-border-radius: 3px;
+   border-radius: 3px;
+   text-align: center;
+   vertical-align: middle;
+   display: inline-block;
+   font-size: 12px;
+   color: #0a090a;
+
+   height: 0px;
+   padding: 13px;
+   border-color: #2e2e2e;
+   border-width: 1px;
+   border-style: solid;
+ }
+
+.change-me:active {
+   box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 0 6px;
+   o-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 0 6px;
+   -moz-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 0 6px;
+   -webkit-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 0 6px;
+   position: relative;
+   top: 4px
+ }
+
+.change-me:hover {
+   background: #438b99;
+   background: -o-linear-gradient(90deg, #438b99, #7fe3a9);
+   background: -moz-linear-gradient( center top, #438b99 5%, #7fe3a9 100%);
+   background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #438b99), color-stop(1, #7fe3a9));
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#438b99', endColorstr='#7fe3a9');
+   background: -webkit-linear-gradient(#438b99, #7fe3a9);
+   background: -ms-linear-gradient(#438b99, #7fe3a9);
+   background: linear-gradient(#438b99, #7fe3a9);
+ }
+
+.peek-a-boo {
+    margin-left:10px;
+   font-weight: bold;
+   text-decoration: none;
+   font-family: Arial;
+   box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 4px 6px;
+   o-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 4px 6px;
+   -moz-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 4px 6px;
+   -webkit-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 4px 6px;
+   background: #7fe3a9;
+   background: -o-linear-gradient(90deg, #7fe3a9, #438b99);
+   background: -moz-linear-gradient( center top, #7fe3a9 5%, #438b99 100%);
+   background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #7fe3a9), color-stop(1, #438b99));
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7fe3a9', endColorstr='#438b99');
+   background: -webkit-linear-gradient(#7fe3a9, #438b99);
+   background: -ms-linear-gradient(#7fe3a9, #438b99);
+   background: linear-gradient(#7fe3a9, #438b99);
+   text-indent: 0px;
+   line-height: 0px;
+   -moz-border-radius: 3px;
+   -webkit-border-radius: 3px;
+   border-radius: 3px;
+   text-align: center;
+   vertical-align: middle;
+   display: inline-block;
+   font-size: 12px;
+   color: #0a090a;
+
+   height: 0px;
+   padding: 13px;
+   border-color: #2e2e2e;
+   border-width: 1px;
+   border-style: solid;
+ }
+
+.peek-a-boo:active {
+   box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 0 6px;
+   o-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 0 6px;
+   -moz-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 0 6px;
+   -webkit-box-shadow: inset #c476c4 0px 5px 8px -1px, #87e4e6 0px 0 6px;
+   position: relative;
+   top: 4px
+ }
+
+.peek-a-boo:hover {
+   background: #438b99;
+   background: -o-linear-gradient(90deg, #438b99, #7fe3a9);
+   background: -moz-linear-gradient( center top, #438b99 5%, #7fe3a9 100%);
+   background: -webkit-gradient( linear, left top, left bottom, color-stop(0.05, #438b99), color-stop(1, #7fe3a9));
+   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#438b99', endColorstr='#7fe3a9');
+   background: -webkit-linear-gradient(#438b99, #7fe3a9);
+   background: -ms-linear-gradient(#438b99, #7fe3a9);
+   background: linear-gradient(#438b99, #7fe3a9);
+ }
+
+ .url-spell {
+   margin-left: 10px;
+   color: rgb(0, 47, 255);
+ }
+ 
+ .com {
+   margin-left: 10px;
+   color: pink;
+ }
+ 
+ .pat {
+   margin-left: 10px;
+ }
