@@ -3,5 +3,14 @@
 }
 
 .protecter-bg {
+<<<<<<< HEAD
+  background: rgba(245, 245, 245, 0.658) !important;
+}
+
+form.signup,
+form.login {
+  margin-top: 50px;
+=======
   background: rgba(245, 245, 245, 0.658)!important;
+>>>>>>> master
 }

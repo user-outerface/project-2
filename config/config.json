@@ -9,10 +9,11 @@
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "testdb",
+    "password": "root",
+    "database": "sequelize_passport_db;",
     "host": "localhost",
     "dialect": "mysql",
+    "port": 3307,
     "logging": false
   },
   "production": {

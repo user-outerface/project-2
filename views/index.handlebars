@@ -3,7 +3,23 @@
     <div class="row">
       <div class="col-8 offset-2">
         <h1>{{msg}}</h1>
-        <h2>This is our Home Page!</h2>
+        {{!-- Display username --}}
+        <h2>
+          <span class="member-name"></span> Home Page!</h2>
+
+        {{!-- Logout option --}}
+
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <a class="navbar-brand" href="/logout">
+                Logout
+              </a>
+            </div>
+          </div>
+        </nav>
+
+
         <form class="clearfix mb-4" action="POST">
           <div class="form-group">
             <label for="quote-text">Quote Text</label>
@@ -30,24 +46,25 @@
 
 <div>
   {{#each user/0/urls}}
-      <section id="bg-pic-{{uId}}" class="url-house-{{uId}} ajax-iterator">
-          <div class="protecter-bg">
-            
-            <div class="url-grabber-{{uId}} url-{{uId}} url-spell">
-                {{url}}
-            </div>
-            <div class="url-grabber-{{uId}} comment-{{uId}}">
-                {{comment}}
-            </div>
-            <div class="url-grabber-{{uId}} path-{{uId}}">
-                {{filePath}}
-            </div>
-            <button class="peek-a-boo" data-site={{url}}>{{url}}</button>
-            <button class="change-me" data-id={{uId}} data-update="false">update {{uId}}</button>
-            <button class="delete-me" data-id={{uId}}>delete {{uId}}</button><hr>
+  <section id="bg-pic-{{uId}}" class="url-house-{{uId}} ajax-iterator">
+    <div class="protecter-bg">
 
-          </div>
-      </section>
+      <div class="url-grabber-{{uId}} url-{{uId}} url-spell">
+        {{url}}
+      </div>
+      <div class="url-grabber-{{uId}} comment-{{uId}}">
+        {{comment}}
+      </div>
+      <div class="url-grabber-{{uId}} path-{{uId}}">
+        {{filePath}}
+      </div>
+      <button class="peek-a-boo" data-site={{url}}>{{url}}</button>
+      <button class="change-me" data-id={{uId}} data-update="false">update {{uId}}</button>
+      <button class="delete-me" data-id={{uId}}>delete {{uId}}</button>
+      <hr>
+
+    </div>
+  </section>
   {{/each}}
   <input id="url-me-up" placeholder="url here">
   <input id="comment-me-up" placeholder="comment here">
