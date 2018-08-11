@@ -26,7 +26,7 @@ module.exports = function(app) {
         .toArray(function(err, result){
             if(err) throw err;
             res.render("index", {
-              msg: "Welcome!",
+              msg: "BookMarkY!",
               quotes: dbQuotes,
               user: result
             });

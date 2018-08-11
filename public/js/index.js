@@ -42,6 +42,7 @@ var API = {
 // refreshQuotes gets new quotes from the db and repopulates the list
 var refreshQuotes = function() {
   API.getQuotes().then(function(data) {
+  
     var $quotes = data.map(function(quote) {
       var $a = $("<a>")
         .text(quote.text)
@@ -75,13 +76,7 @@ var handleFormSubmit = function(event) {
 
   var quote = {
     text: $quoteText.val().trim(),
-    description: $quoteDescription.val().trim()
   };
-
-  if (!(quote.text && quote.description)) {
-    alert("You must enter an quote text and description!");
-    return;
-  }
 
   API.saveQuote(quote).then(function() {
     refreshQuotes();
