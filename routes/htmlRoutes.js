@@ -2,41 +2,47 @@ var db = require("../models");
 var keys = require('../keys.js'),
     MongoClient = require('mongodb').MongoClient,
     url = keys.mongoDBUrl.mongo_url,
-    assert = require('assert');
+    assert = require('assert'),
+    Sequelize = require("../models").sequelize;
 require('dotenv').config();
 
 module.exports = function(app) {
   // Load index page & database connection within
   // a database connection
   app.get("/", function(req, res) {
-    var dbExPasser;
-    db.Example.findAll({}).then(function(dbExamples) {
-      dbExPasser = dbExamples;
+    db.Quote.findAll({
+      order: [
+        Sequelize.fn("RAND")
+      ],
+      limit: 1
+    }).then(function(dbQuotes) {
+
+      MongoClient.connect(url, function(err, mdb){
+        console.log("connected to mdb");
+        var collection = mdb.collection('urls');
+        if(err) throw err;
+        assert.equal(null, err);
+        collection.find({userName: 'dreamwalker'})
+        .toArray(function(err, result){
+            if(err) throw err;
+            res.render("index", {
+              msg: "Welcome!",
+              quotes: dbQuotes,
+              user: result
+            });
+        });
+      });
+
     });
 
-    MongoClient.connect(url, function(err, mdb){
-      console.log("connected to mdb");
-      var collection = mdb.collection('urls');
-      if(err) throw err;
-      assert.equal(null, err);
-      collection.find({userName: 'dreamwalker'})
-      .toArray(function(err, result){
-          if(err) throw err;
-          res.render("index", {
-            msg: "Welcome!",
-            examples: dbExPasser,
-            user: result
-          });
-      });
-    });
     
   });
 
-  // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
-      res.render("example", {
-        example: dbExample
+  // Load quote page and pass in an quote by id
+  app.get("/quote/:id", function(req, res) {
+    db.Quote.findOne({ where: { id: req.params.id } }).then(function(dbQuote) {
+      res.render("quote", {
+        quote: dbQuote
       });
     });
   });

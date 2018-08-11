@@ -6,20 +6,16 @@
         <h2>This is our Home Page!</h2>
         <form class="clearfix mb-4" action="POST">
           <div class="form-group">
-            <label for="example-text">Example Text</label>
-            <input type="text" id="example-text" class="form-control" aria-describedby="example-text" placeholder="Enter Example Text">
-          </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
+            <label for="quote-text">Quote Text</label>
+            <input type="text" id="quote-text" class="form-control" aria-describedby="quote-text" placeholder="Enter Quote Text">
           </div>
           <button id="submit" class="btn btn-primary float-right">Submit</button>
         </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
+        <h3>Quotes:</h3>
+        <ul id="quote-list" class="list-group">
+          {{#each quotes}}
           <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
+            <a href="quote/{{this.id}}">{{this.text}}</a>
             <button class="btn btn-danger float-right delete">ｘ</button>
           </li>
           {{/each}}
@@ -53,7 +49,6 @@
           </div>
       </section>
   {{/each}}
-  <input id="id-me-up" placeholder="id here">
   <input id="url-me-up" placeholder="url here">
   <input id="comment-me-up" placeholder="comment here">
   <input id="path-me-up" placeholder="path here">
