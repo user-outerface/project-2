@@ -2,14 +2,20 @@ var db = require("../models");
 var keys = require('../keys.js'),
     MongoClient = require('mongodb').MongoClient,
     url = keys.mongoDBUrl.mongo_url,
-    assert = require('assert');
+    assert = require('assert'),
+    Sequelize = require("../models").sequelize;
 require('dotenv').config();
 
 module.exports = function(app) {
   // Load index page & database connection within
   // a database connection
   app.get("/", function(req, res) {
-    db.Quote.findAll({}).then(function(dbQuotes) {
+    db.Quote.findAll({
+      order: [
+        Sequelize.fn("RAND")
+      ],
+      limit: 1
+    }).then(function(dbQuotes) {
 
       MongoClient.connect(url, function(err, mdb){
         console.log("connected to mdb");
