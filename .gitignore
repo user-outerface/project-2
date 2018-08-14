@@ -1,0 +1,6 @@
+node_modules
+.env
+test.html
+notes.md
+package-lock.json
+playground.js
