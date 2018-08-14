@@ -159,7 +159,7 @@ function baseInfection() {
   $(".ajax-iterator").each(function () {
     var targeter = $(this).attr("id");
     console.log(targeter);
-    var urlPusher = $("section#" + targeter).find("div.url-spell").text().trim();
+    var urlPusher = $("section#" + targeter).find("a.url-spell").text().trim();
     console.log(urlPusher);
     $.ajax('/api/peeker/', {
       type: "GET"
