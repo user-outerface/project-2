@@ -15,17 +15,19 @@ module.exports = function (app) {
   app.get("/", function (req, res) {
     // If the user already has an account send them to the index page
     if (req.user) {
-      res.render("index");
+      res.redirect("/index");
+    } else {
+      res.render("signup");
     }
-    res.render("signup");
   });
 
   app.get("/login", function (req, res) {
     // If the user already has an account send them to the index page
     if (req.user) {
-      res.render("index");
+      res.redirect("/index");
+    } else {
+      res.render("login");
     }
-    res.render("login");
   });
 
   // Here we've add our isAuthenticated middleware to this route.
