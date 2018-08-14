@@ -114,7 +114,6 @@ function errorFunction(xhr, status, error) {
 
 function displayPageScore(result, status, xhr) {
   score = result.ruleGroups.SPEED.score
-  console.log(score);
 }
 
 //Gives display picture for page
@@ -128,45 +127,23 @@ function getPageSpeedInsightsFor(URL, API_KEY, divId) {
     url: API_URL + query,
     type: "GET",
   }).then(function (response) {
-    console.log("hit");
-    // $(".dump").empty();
-    // $(".dump").append(`<img src="data:image/jpeg;base64, ${reverseChanger(response.screenshot.data)}" alt="screenshot">`)
-    // reverseChanger(response.screenshot.data);
-    // console.log(reverseChanger(response.screenshot.data));
     var imgB64 = "url('data:image/jpeg;base64, " + reverseChanger(response.screenshot.data) + "')";
-    //so the background image is working, but it makes
-    //the html look like garbage
     $("#" + divId).css("background-image", imgB64);
-    console.log("fin");
   });
 
 }
 
-//button for display
-// $(".peek-a-boo").click(function(){
-//   urlSeeker = $(this).data("site");
-//   $.ajax("/api/peeker/", {
-//     type: "GET"
-//   }).then(response =>{
-//     console.log("hit");
-//     var apiKey = response.api_key;
-//     getPageSpeedInsightsFor("http://" + urlSeeker, apiKey);
-//   });
-// });
-$(".peek-a-boo").text("intentionally broken");
-
+//baseInfection calls the ajax call for the pictures for how
+//many urls are stored
 function baseInfection() {
   $(".ajax-iterator").each(function () {
     var targeter = $(this).attr("id");
-    console.log(targeter);
     var urlPusher = $("section#" + targeter).find("a.url-spell").text().trim();
-    console.log(urlPusher);
     $.ajax('/api/peeker/', {
       type: "GET"
     }).then(response => {
       var apiKey = response.api_key;
       getPageSpeedInsightsFor("http://" + urlPusher, apiKey, targeter);
-      console.log("hit init");
     });
   });
 };
@@ -263,35 +240,9 @@ function updateMeUp(idPlac, selectorTaker) {
   });
 }
 
-
-//makes a new user. This needs to be dynamically functional
-//right now it is static
-$(".new-user").click(function () {
-  var newUseId = {
-    usId: makeid("user")
-  }
-  $.ajax('/api/mongo/user-new', {
-    type: "POST",
-    data: newUseId
-  }).then(results => {
-    console.log(results);
-  });
-});
-
-//deletes a user. This needs to be dynamically functional
-//right now it is static
-$(".delete-user").click(function () {
-  $.ajax('/api/mongo/user-delete', {
-    type: "DELETE"
-  }).then(results => {
-    console.log(results);
-  });
-});
-
 $(document).ready(function () {
   hitMeUp();
   deleteMeUp();
   updateInit();
   baseInfection();
-  console.log("yo");
 });
