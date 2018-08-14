@@ -1,21 +1,36 @@
 <div id="home">
 
-  {{!-- Logout option --}}
+  {{!-- Logout option --}} {{!--
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header center">
-        <a class="navbar-brand" href="/logout">
+        <a id="log-out" class="navbar-brand" href="/logout">
           Logout
         </a>
+
+      </div>
+      <div class="text-center">
+        <h1 class="text-center" id="title">
+          Book-MarkY!
+        </h1>
+      </div>
+    </div>
+  </nav> --}}
+
+
+  <nav id="Jumbo" class="navbar navbar-default">
+    <div class="container-fluid">
+      <a id="log-out" class="navbar-brand" href="/logout">
+        Logout
+      </a>
+      <h1 id="title">Book-MarkY!</h1>
+      <div>
+
       </div>
     </div>
   </nav>
 
-  <div class="text-center">
-    <h1 id="title">
-      BookMarkY!
-    </h1>
-  </div>
+
 
   <br>
   <div class="center">
@@ -30,10 +45,12 @@
       {{#each user/0/urls}}
       <div class="col-4">
         <div class="card-body">
-          <section id="bg-pic-{{uId}}" class="url-house-{{uId}} ajax-iterator">
+          <section id="bg-pic-{{uId}}" class="url-house-{{uId}} ajax-iterator rounded">
             <div class="protecter-bg">
-              <div class="url-grabber-{{uId}} url-{{uId}} url-spell">
-                {{url}}
+              <div class="col-auto text-center">
+                <a href="https://{{url}}" target="_blank"class="url-grabber-{{uId}} url-{{uId}} url-spell">
+                  {{url}}
+                </a>
               </div>
               <div class="url-grabber-{{uId}} comment-{{uId}} com">
                 {{comment}}
@@ -46,7 +63,6 @@
               <br>
               <br>
               <br>
-              <button class="peek-a-boo" data-site={{url}}>{{url}}</button>
               <button class="change-me" data-id={{uId}} data-update="false">update {{uId}}</button>
               <button class="delete-me" data-id={{uId}}>delete {{uId}}</button>
               <hr>
@@ -61,19 +77,18 @@
   <div class="container">
     <div id="top-right">
       <div class="col-8 offset-2">
-        <h3 id="title" class="center">- Git Inspired -</h3>
+        <h3 id="title-2" class="center">Git Inspired </h3>
         <form class="clearfix mb-4" action="POST">
-          <div class="form-group">
-            <label for="quote-text">Inspire Yourself!</label>
+          <div id="quote-div" class="form-group">
             <input type="text" id="quote-text" class="form-control" aria-describedby="quote-text" placeholder="Save Quotes Here For Later">
           </div>
           <button id="submit" class="btn btn-primary align-middle">Submit</button>
         </form>
 
-        <ul id="quote-list" class="list-group">
+        <ul id="quote-list" class="list-group mb-4">
           {{#each quotes}}
           <li data-id="{{this.id}}" class="list-group-item">
-            <p href="quote/{{this.id}}">{{this.text}}</p>
+            <p class="quote" href="quote/{{this.id}}">{{this.text}}</p>
             <button class="btn btn-danger float-right delete">ｘ</button>
           </li>
           {{/each}}
