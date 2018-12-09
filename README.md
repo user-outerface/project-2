@@ -1,4 +1,4 @@
-[link](https://calm-ocean-96864.herokuapp.com/)
+[Application](https://calm-ocean-96864.herokuapp.com/)
 
 # **Collaborators**
 
