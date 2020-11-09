@@ -5,3 +5,7 @@ exports.mongoDBUrl = {
 exports.peeker = {
     api_key: process.env.API_KEY
 }
+
+exports.mongoDBdb = {
+    mongoDBdb: process.env.MONGODBdb
+}

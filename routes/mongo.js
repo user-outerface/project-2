@@ -2,13 +2,14 @@ var MongoClient = require("mongodb").MongoClient;
 var keys = require('../keys');
 var url = keys.mongoDBUrl.mongo_url;
 var assert = require("assert");
+var mdbl = keys.mongoDBdb.mongoDBdb;
 require('dotenv').config();
 
 module.exports = function (app) {
 
     app.delete('/api/mongo/user-delete', function (req, res) {
         MongoClient.connect(url, function (err, db) {
-            var collection = db.collection('urls');
+            var collection = db.db(mdbl).collection('urls');
             collection.remove({
                 usId: req.user.foreignid
             }, {
@@ -21,7 +22,7 @@ module.exports = function (app) {
 
     app.put('/api/mongo/new-url', function (req, res) {
         MongoClient.connect(url, function (err, db) {
-            var collection = db.collection('urls');
+            var collection = db.db(mdbl).collection('urls');
             var urlId = req.body.uId;
             var newUrl = req.body.url;
             var newComm = req.body.comment;
@@ -46,7 +47,7 @@ module.exports = function (app) {
 
     app.put('/api/mongo/up-url', function (req, res) {
         MongoClient.connect(url, function (err, db) {
-            var collection = db.collection('urls');
+            var collection = db.db(mdbl).collection('urls');
             var urlId = req.body.uId;
             var newUrl = req.body.url;
             var newComm = req.body.comment;
@@ -70,7 +71,7 @@ module.exports = function (app) {
 
     app.put('/api/mongo/del-url', function (req, res) {
         MongoClient.connect(url, function (err, db) {
-            var collection = db.collection('urls');
+            var collection = db.db(mdbl).collection('urls');
             var urlId = req.body.uId;
             if (err) throw err;
             assert.equal(null, err);

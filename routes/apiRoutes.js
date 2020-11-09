@@ -2,6 +2,7 @@ var db = require("../models");
 var passport = require("../config/passport");
 var keys = require('../keys.js');
 var url = keys.mongoDBUrl.mongo_url;
+var mdbl = keys.mongoDBdb.mongoDBdb;
 var Sequelize = require("../models").sequelize;
 var MongoClient = require("mongodb").MongoClient;
 require('dotenv').config();
@@ -65,7 +66,7 @@ module.exports = function (app) {
       console.log(req.body.foreignid + "YAAAAASSSSSS");
 
       MongoClient.connect(url, function (err, db) {
-        var collection = db.collection('urls');
+        var collection = db.db(mdbl).collection('urls');
         collection.insert({
           usId: mongoId,
           userName: mongoloid,

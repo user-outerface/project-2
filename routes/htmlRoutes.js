@@ -6,6 +6,7 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 var keys = require('../keys.js'),
   MongoClient = require('mongodb').MongoClient,
   url = keys.mongoDBUrl.mongo_url,
+  mdbl = keys.mongoDBdb.mongoDBdb,
   assert = require('assert'),
   Sequelize = require("../models").sequelize;
 require('dotenv').config();
@@ -48,9 +49,8 @@ module.exports = function (app) {
     }).then(function (dbQuotes) {
       MongoClient.connect(url, function (err, mdb) {
         console.log("connected to mdb");
-        var collection = mdb.collection('urls');
+        var collection = mdb.db(mdbl).collection('urls');
         if (err) throw err;
-        assert.equal(null, err);
         collection.find({
             usId: req.user.foreignid
           })
